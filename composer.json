@@ -18,15 +18,15 @@
         },
         {
             "name": "Community contributors",
-            "homepage": "https://github.com/partkeepr/PartKeepr/contributors"
+            "homepage": "https://github.com/jlitewski/PartKeepr-NG/contributors"
         }
     ],
     "support": {
-        "issues": "https://github.com/partkeepr/PartKeepr/issues",
+        "issues": "https://github.com/jlitewski/PartKeepr-NG/issues",
         "irc": "irc://irc.freenode.org/partkeepr",
         "wiki": "http://wiki.partkeepr.org",
         "forum": "http://forum.partkeepr.org",
-        "source": "https://github.com/partkeepr/PartKeepr",
+        "source": "https://github.com/jlitewski/PartKeepr-NG",
         "faq": "http://faq.partkeepr.org"
     },
     "require": {
@@ -98,6 +98,9 @@
         "symfony/stopwatch": "^4.4",
         "symfony/var-dumper": "^4.4",
         "symfony/web-profiler-bundle": "^4.4"
+    },
+    "suggest": {
+        "ext-curl": "*"
     },
     "config": {
         "preferred-install": {

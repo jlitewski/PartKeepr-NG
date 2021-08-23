@@ -8,7 +8,7 @@ parameters:
     app.name: "PartKeepr Next Gen"
     app.description: "The Next Generation port of PartKeepr, the Open Source Inventory Software"
     app.abbreviation: "PKNG"
-    app.version: 0.0.1
+    app.version: "0.1"
     # Database settings
     # Please change these to match your configuration!
     app.db.host: "localhost"
@@ -41,3 +41,6 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    App\Services\Core\VersionService:
+        arguments:
+            $version: "%app.version%"

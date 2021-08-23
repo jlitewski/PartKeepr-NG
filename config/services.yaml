@@ -9,6 +9,13 @@ parameters:
     app.description: "The Next Generation port of PartKeepr, the Open Source Inventory Software"
     app.abbreviation: "PKNG"
     app.version: 0.0.1
+    # Database settings
+    # Please change these to match your configuration!
+    app.db.host: "localhost"
+    app.db.port: 3306
+    app.db.dbname: "symfony"
+    app.db.username: "root"
+    app.db.password: null
 
 services:
     # default configuration for services in *this* file

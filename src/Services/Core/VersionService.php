@@ -15,7 +15,7 @@ class VersionService {
     /**
      * 
      */
-    private string $versionURI;
+    private string $versionURI = 'http://www.partkeepr.org/versions.json';
 
     /**
      * 

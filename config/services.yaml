@@ -15,7 +15,7 @@ parameters:
     app.db.port: 3306
     app.db.dbname: "symfony"
     app.db.username: "root"
-    app.db.password: null
+    app.db.password: ""
 
 services:
     # default configuration for services in *this* file

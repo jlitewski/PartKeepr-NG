@@ -2,9 +2,9 @@
 namespace App\Entity\Units;
 
 use App\Entity\Core\PKNGEntity;
+use App\Util\Annotation\TargetService;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
-use PartKeepr\DoctrineReflectionBundle\Annotation\TargetService;
 
 /**
  * Represents an SI Prefix.

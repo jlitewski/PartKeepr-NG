@@ -16,7 +16,14 @@ class IndexPage extends AbstractController {
      * @Route("/")
      */
     public function renderPage(): Response {
-        return $this->render("base.html.twig");
+        return $this->render("pages/index.html.twig", $this->getParameters());
+    }
+
+    protected function getParameters(): array {
+        $params = [];
+        $params['baseUrl'] = $this->container->get('router')->getContext()->getBaseUrl();
+
+        return $params;
     }
 
 }

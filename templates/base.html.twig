@@ -1,21 +1,24 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
     <head>
-        <link rel="icon" href="{{asset('/img/favicon.ico')}}" />
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+        {% block head %}
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+            <link rel="icon" href="{{asset('/img/favicon.ico')}}" />
 
-        {% block javascripts %}
-           {{ encore_entry_script_tags('app') }}
-        {% endblock %}
+            <title>PartKeepr-NG {% block subtitle %}{% endblock %}</title>
+            <base href="{{ baseUrl }}"/>
+
+            {% block head_css %}{% endblock %}
+            {% block head_js %}{% endblock %}
+        {% endblock head %}
     </head>
     <body>
-        <span>Hello World!</span>
+        <div id="loader-wrapper">
+            <div id="loader-logo"></div>
+            <div id="loader"></div>
+            <div id="loader-message"></div>
+        </div>
         {% block body %}{% endblock %}
     </body>
 </html>

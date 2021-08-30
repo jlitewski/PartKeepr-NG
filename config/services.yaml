@@ -16,6 +16,8 @@ parameters:
     app.db.dbname: "symfony"
     app.db.username: "root"
     app.db.password: ""
+    # Cache Directories
+    app.cache.image: "../cache/img"
 
 services:
     # default configuration for services in *this* file

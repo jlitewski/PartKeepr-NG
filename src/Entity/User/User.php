@@ -1,18 +1,21 @@
 <?php
-
-declare(strict_types=1);
-
 namespace App\Entity\User;
 
-use Nucleos\UserBundle\Model\User as BaseUser;
+use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Core\PKNGEntity;
+use App\Util\Annotation\TargetService;
+use App\Util\Annotation\VirtualField;
+use Symfony\Component\Security\Core\User\EquatableInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @phpstan-extends User<\Nucleos\UserBundle\Model\GroupInterface>
+ * @ORM\Entity
+ * @ORM\Table(
+ *      name="PartKeeprUser",
+ *      uniqueConstraints={@ORM\UniqueConstraint(name="username_provider", columns={"username", "provider_id"})})
+ * @TargetService(uri="/api/users")
  */
-class User extends BaseUser
-{
-    public function setId(string $id): void
-    {
-        $this->id = $id;
-    }
+class User extends PKNGEntity implements UserInterface, EquatableInterface {
+    
 }

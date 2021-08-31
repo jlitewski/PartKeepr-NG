@@ -29,7 +29,7 @@ abstract class PKNGEntity {
      * 
      * @var string
      */
-    private string $errorMsg = null; //TODO: Maybe make this an array for multiple messages?
+    private string $errorMsg; //TODO: Maybe make this an array for multiple messages?
 
     /**
      * @ORM\Id

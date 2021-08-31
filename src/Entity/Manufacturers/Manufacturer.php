@@ -95,7 +95,7 @@ class Manufacturer extends PKNGEntity {
      *
      * @UploadedFileCollection()
      * @Groups({"default"})
-     * @ORM\Table(name="icLogos")
+     * @ORM\Column(name="icLogos")
      */
     private $logos;
 

@@ -9,7 +9,13 @@ final class ImageType extends BasicEnum {
     const FOOTPRINT = "footprint";
 
     public static function toArray(): array {
-        return [self::LOGO, self::TEMP, self::PART, self::STORAGE, self::FOOTPRINT];
+        return [
+            self::LOGO,
+            self::TEMP,
+            self::PART,
+            self::STORAGE,
+            self::FOOTPRINT
+        ];
     }
 
 }

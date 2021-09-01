@@ -6,6 +6,9 @@ final class PartParameterValues extends BasicEnum {
     const NUM = "numeric";
 
     public static function toArray(): array {
-        return [self::STR, self::NUM];
+        return [
+            self::STR,
+            self::NUM
+        ];
     }
 }

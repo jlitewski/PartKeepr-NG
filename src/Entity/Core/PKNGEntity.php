@@ -111,9 +111,9 @@ abstract class PKNGEntity {
     /**
      * Represents a change to the PKNGEntity
      * 
-     * THIS SHOULD ONLY BE USED INTERNALLY BY THE ENTITIES
+     * @internal THIS SHOULD ONLY BE USED INTERNALLY BY THE ENTITIES
      */
-    protected final function mark() {
+    protected final function mark(): void {
         if(!$this->isDirty()){
             $this->dirty = true;
         }
@@ -122,9 +122,9 @@ abstract class PKNGEntity {
     /**
      * Clears the dirty flag after running through a Validate() check
      * 
-     * THIS SHOULD ONLY BE USED INTERNALLY BY THE ENTITIES
+     * @internal THIS SHOULD ONLY BE USED INTERNALLY BY THE ENTITIES
      */
-    protected final function clearMark() {
+    protected final function clearMark(): void {
         if(!$this->isDirty()){
             $this->dirty = false;
         }
@@ -132,8 +132,10 @@ abstract class PKNGEntity {
 
     /**
      * Wrapper for filter_var to support nullable inputs
+     * 
+     * @return mixed|null Return the results of filter_var or null
      */
-    protected final function sanitizeInput(mixed $input, int $flag, bool $isNullable = false): mixed {
+    protected final function sanitizeInput(?mixed $input, int $flag, bool $isNullable = false): ?mixed {
         if($isNullable && $input === null) return null;
         return filter_var($input, $flag);
     }
@@ -144,6 +146,8 @@ abstract class PKNGEntity {
      * headaches down the line
      * 
      * @throws InvalidEntityStateException
+     * @return void
+     * @todo Maybe use this as a wrapper for the Symfony validation tools? Is that possible?
      */
     public abstract function Validate();
 }

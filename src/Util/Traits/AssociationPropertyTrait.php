@@ -1,5 +1,5 @@
 <?php
-namespace App\Util\Filters;
+namespace App\Util\Traits;
 
 trait AssociationPropertyTrait {
     /**

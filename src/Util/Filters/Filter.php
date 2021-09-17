@@ -3,6 +3,7 @@ namespace App\Util\Filters;
 
 use App\Util\Enums\FilterOperators;
 use App\Util\Enums\FilterTypes;
+use App\Util\Traits\AssociationPropertyTrait;
 
 class Filter implements IAssociationProperty {
     use AssociationPropertyTrait;

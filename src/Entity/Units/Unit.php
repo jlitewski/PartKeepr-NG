@@ -68,7 +68,7 @@ class Unit extends PKNGEntity {
      * Set the value of name
      */
     public function setName(string $name): self {
-        $this->name = $name;
+        $this->name = $this->sanitizeInput($name, FILTER_SANITIZE_STRING);
         $this->mark();
 
         return $this;
@@ -85,7 +85,7 @@ class Unit extends PKNGEntity {
      * Set the value of symbol
      */
     public function setSymbol(string $symbol): self {
-        $this->symbol = $symbol;
+        $this->symbol = $this->sanitizeInput($symbol, FILTER_SANITIZE_STRING);
         $this->mark();
 
         return $this;

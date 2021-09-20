@@ -126,14 +126,14 @@ class Manufacturer extends PKNGEntity {
     /**
      * Get the value of address
      */
-    public function getAddress(): string {
+    public function getAddress(): ?string {
         return $this->address;
     }
 
     /**
      * Set the value of address
      */
-    public function setAddress(string $address): self {
+    public function setAddress(?string $address): self {
         $this->address = $this->sanitizeInput($address, FILTER_SANITIZE_STRING, true);
         $this->mark();
 
@@ -143,14 +143,14 @@ class Manufacturer extends PKNGEntity {
     /**
      * Get the value of url
      */
-    public function getUrl(): string {
+    public function getUrl(): ?string {
         return $this->url;
     }
 
     /**
      * Set the value of url
      */
-    public function setUrl(string $url): self {
+    public function setUrl(?string $url): self {
         if($url === null || preg_match('/^(http|https):\\/\\/[a-z0-9_]+([\\-\\.]{1}[a-z_0-9]+)*\\.[_a-z]{2,5}'.'((:[0-9]{1,5})?\\/.*)?$/i', $url)){
             $this->url = $url;
             $this->mark();
@@ -164,14 +164,14 @@ class Manufacturer extends PKNGEntity {
     /**
      * Get the the email for the Manufacturer
      */
-    public function getEmail(): string {
+    public function getEmail(): ?string {
         return $this->email;
     }
 
     /**
      * Set the email for the Manufacturer
      */
-    public function setEmail(string $email): self {
+    public function setEmail(?string $email): self {
         $temp = $this->sanitizeInput($email, FILTER_SANITIZE_EMAIL, true);
         if($temp !== null) {
             if(!filter_var($temp, FILTER_VALIDATE_EMAIL)) {
@@ -189,14 +189,14 @@ class Manufacturer extends PKNGEntity {
     /**
      * Gets the phone number for the Manufacturer
      */
-    public function getPhone() {
+    public function getPhone(): ?string {
         return $this->phone;
     }
 
     /**
      * Set the phone number of the Manufacturer
      */
-    public function setPhone(string $phone): self {
+    public function setPhone(?string $phone): self {
         $this->phone = $this->sanitizeInput($phone, FILTER_SANITIZE_NUMBER_INT, true);
         $this->mark();
 
@@ -206,14 +206,14 @@ class Manufacturer extends PKNGEntity {
     /**
      * Get the fax number for the Manufacturer
      */
-    public function getFax(): string {
+    public function getFax(): ?string {
         return $this->fax;
     }
 
     /**
      * Set the fax number for the Manufacturer
      */
-    public function setFax(string $fax): self {
+    public function setFax(?string $fax): self {
         $this->fax = $this->sanitizeInput($fax, FILTER_SANITIZE_NUMBER_INT, true);
         $this->mark();
 
@@ -223,14 +223,14 @@ class Manufacturer extends PKNGEntity {
     /**
      * Get the value of comment
      */
-    public function getComment(): string {
+    public function getComment(): ?string {
         return $this->comment;
     }
 
     /**
      * Set the value of comment
      */
-    public function setComment(string $comment): self {
+    public function setComment(?string $comment): self {
         $this->comment = $this->sanitizeInput($comment, FILTER_SANITIZE_STRING, true);
         $this->mark();
 

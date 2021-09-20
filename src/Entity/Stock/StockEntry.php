@@ -100,7 +100,7 @@ class StockEntry extends PKNGEntity {
      * @return StockEntry 
      */
     public function correctionRecord(bool $flag): self {
-        $this->correction = $flag;
+        $this->correction = $this->sanitizeInput($flag, FILTER_VALIDATE_BOOLEAN);
         $this->mark();
 
         return $this;
@@ -128,6 +128,7 @@ class StockEntry extends PKNGEntity {
      * Get the price for this entry.
      * 
      * The price is for a single item only, and can be null
+     * @return float|null The price of this stock entry, or null
      */
     public function getPrice(): ?float {
         return $this->price;
@@ -138,7 +139,7 @@ class StockEntry extends PKNGEntity {
      *
      * Please note that the price is for a single item only, and can be null.
      
-     * @param $price The price to set (as a float), or null to remove the price
+     * @param float|null $price The price to set (as a float), or null to remove the price
      * @return StockEntry
      */
     public function setPrice(?float $price): self {
@@ -211,11 +212,11 @@ class StockEntry extends PKNGEntity {
     /**
      * Sets a comment on this stock entry
      * 
-     * @param string $comment The comment for this StockEntry
+     * @param string|null $comment The comment for this StockEntry
      * @return StockEntry
      */
     public function setComment(?string $comment): self {
-        $this->comment = $this->sanitizeInput($comment, FILTER_SANITIZE_STRING);
+        $this->comment = $this->sanitizeInput($comment, FILTER_SANITIZE_STRING, true);
         $this->mark();
 
         return $this;

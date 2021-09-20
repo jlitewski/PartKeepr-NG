@@ -171,8 +171,8 @@ class BatchJob extends PKNGEntity {
      * @param string $name
      * @return self
      */
-    public function setName($name): self {
-        $this->name = $name;
+    public function setName(string $name): self {
+        $this->name = $this->sanitizeInput($name, FILTER_SANITIZE_STRING);
         $this->mark();
 
         return $this;

@@ -151,7 +151,7 @@ abstract class FileEntity extends PKNGEntity {
      * Set the value of description
      */
     public function setDescription(string $description): self {
-        $this->description = $description;
+        $this->description = $this->sanitizeInput($description, FILTER_SANITIZE_STRING);
         $this->mark();
 
         return $this;
@@ -168,7 +168,7 @@ abstract class FileEntity extends PKNGEntity {
      * Set the value of extension
      */
     public function setExtension(string $extension): self {
-        $this->extension = $extension;
+        $this->extension = $this->sanitizeInput($extension, FILTER_SANITIZE_STRING);
         $this->mark();
 
         return $this;
@@ -185,7 +185,7 @@ abstract class FileEntity extends PKNGEntity {
      * Set the value of size
      */
     public function setSize(int $size): self {
-        $this->size = intval($size);
+        $this->size = $this->sanitizeInput($size, FILTER_SANITIZE_NUMBER_INT);
         $this->mark();
 
         return $this;
@@ -202,7 +202,7 @@ abstract class FileEntity extends PKNGEntity {
      * Set the value of mimetype
      */
     public function setMimetype(string $mimetype): self {
-        $this->mimetype = $mimetype;
+        $this->mimetype = $this->sanitizeInput($mimetype, FILTER_SANITIZE_STRING);
         $this->mark();
 
         return $this;
@@ -219,7 +219,7 @@ abstract class FileEntity extends PKNGEntity {
      * Set the value of originalFilename
      */
     public function setOriginalFilename(string $originalFilename): self {
-        $this->originalFilename = $originalFilename;
+        $this->originalFilename = $this->sanitizeInput($originalFilename, FILTER_SANITIZE_STRING);
         $this->mark();
 
         return $this;
@@ -244,7 +244,7 @@ abstract class FileEntity extends PKNGEntity {
      * Set the value of filename
      */
     public function setFilename(string $filename): self {
-        $this->filename = $filename;
+        $this->filename = $this->sanitizeInput($filename, FILTER_SANITIZE_STRING);
         $this->mark();
 
         return $this;
@@ -261,7 +261,7 @@ abstract class FileEntity extends PKNGEntity {
      * Set the value of type
      */
     protected function setType(string $type): self {
-        $this->type = $type;
+        $this->type = $this->sanitizeInput($type, FILTER_SANITIZE_STRING);
         $this->mark();
 
         return $this;

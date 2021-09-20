@@ -56,7 +56,7 @@ class SiPrefix extends PKNGEntity {
     private $base;
 
     /**
-     * Get the value of prefix
+     * Gets the prefix
      * 
      * @return string
      */
@@ -65,13 +65,13 @@ class SiPrefix extends PKNGEntity {
     }
 
     /**
-     * Set the value of prefix
+     * Sets the Prefix
      * 
      * @param string $prefix
      * @return self
      */
     public function setPrefix(string $prefix): self {
-        $this->prefix = $prefix;
+        $this->prefix = $this->sanitizeInput($prefix, FILTER_SANITIZE_STRING);
         $this->mark();
 
         return $this;
@@ -93,7 +93,7 @@ class SiPrefix extends PKNGEntity {
      * @return self
      */
     public function setSymbol(string $symbol): self {
-        $this->symbol = $symbol;
+        $this->symbol = $this->sanitizeInput($symbol, FILTER_SANITIZE_STRING);
         $this->mark();
 
         return $this;
@@ -115,7 +115,7 @@ class SiPrefix extends PKNGEntity {
      * @return self
      */
     public function setExponent(int $exponent): self {
-        $this->exponent = $exponent;
+        $this->exponent = $this->sanitizeInput($exponent, FILTER_VALIDATE_INT);
         $this->mark();
 
         return $this;
@@ -137,7 +137,7 @@ class SiPrefix extends PKNGEntity {
      * @return self 
      */
     public function setBase(int $base): self {
-        $this->base = $base;
+        $this->base = $this->sanitizeInput($base, FILTER_VALIDATE_INT);
         $this->mark();
 
         return $this;

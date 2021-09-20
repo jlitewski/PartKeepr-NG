@@ -18,7 +18,7 @@ class BatchQueryField extends PKNGEntity implements IBatchEntity {
     /**
      * The part this batch job query field refers to.
      *
-     * @ORM\ManyToOne(targetEntity="PartKeepr\BatchJobBundle\Entity\BatchJob", inversedBy="batchJobQueryFields")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Batches\BatchJob", inversedBy="batchJobQueryFields")
      *
      * @var BatchJob
      */

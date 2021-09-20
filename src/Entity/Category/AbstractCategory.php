@@ -8,13 +8,13 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use App\Entity\Core\PKNGEntity;
 
 /**
- * @ORM\MappedSuperclass()
- * @ORM\Table(indexes={@ORM\Index(columns={"lft"}),@ORM\Index(columns={"rgt"})})
- *
  * Represents an abstract category. This class isn't directly usable; you need to inherit it to take advantage of
  * the AbstractCategoryManager.
  *
  * If you are interested on how NestedSets work, please read http://en.wikipedia.org/wiki/Nested_set_model
+ * 
+ * @ORM\MappedSuperclass()
+ * @ORM\Table(indexes={@ORM\Index(columns={"lft"}),@ORM\Index(columns={"rgt"})})
  */
 abstract class AbstractCategory extends PKNGEntity {
     /**
@@ -27,24 +27,24 @@ abstract class AbstractCategory extends PKNGEntity {
     /**
      * The "left" property of the nested set.
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="lft", type="integer")
      *
      * @Gedmo\TreeLeft
      *
      * @var int
      */
-    private $lft;
+    private $left;
 
     /**
      * The "right" property of the nested set.
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="rgt", type="integer")
      *
      * @Gedmo\TreeRight
      *
      * @var int
      */
-    private $rgt;
+    private $right;
 
     /**
      * @Gedmo\TreeLevel
@@ -52,7 +52,7 @@ abstract class AbstractCategory extends PKNGEntity {
      *
      * @var int
      */
-    private $lvl;
+    private $level;
 
     /**
      * @Gedmo\TreeRoot
@@ -85,7 +85,7 @@ abstract class AbstractCategory extends PKNGEntity {
      *
      * @var bool
      */
-    public $expanded = true;
+    private $expanded = true;
 
     public function __construct() {
         $this->children = new ArrayCollection();
@@ -94,19 +94,19 @@ abstract class AbstractCategory extends PKNGEntity {
     /**
      * Returns the description of this category.
      *
-     * @return string The description
+     * @return string|null The description
      */
-    public function getDescription(): string {
+    public function getDescription(): ?string {
         return $this->description;
     }
 
     /**
      * Sets the description for this category.
      *
-     * @param string $description The description of this category
+     * @param string|null $description The description of this category
      */
-    public function setDescription(string $description): self {
-        $this->description = $description;
+    public function setDescription(?string $description): self {
+        $this->description = $this->sanitizeInput($description, FILTER_SANITIZE_STRING, true);
         $this->mark();
 
         return $this;
@@ -127,7 +127,7 @@ abstract class AbstractCategory extends PKNGEntity {
      * @param string $name The name to set
      */
     public function setName(string $name): self {
-        $this->name = $name;
+        $this->name = $this->sanitizeInput($name, FILTER_SANITIZE_STRING);
         $this->mark();
 
         return $this;
@@ -139,6 +139,83 @@ abstract class AbstractCategory extends PKNGEntity {
      * @return int
      */
     public function getLevel(): int {
-        return $this->lvl;
+        return $this->level;
+    }
+
+    /**
+     * 
+     * @return int 
+     */
+    public function left(): int {
+        return $this->left;
+    }
+
+    /**
+     * 
+     * @param int $categoryID 
+     * @return AbstractCategory 
+     */
+    public function setLeft(int $categoryID): self {
+        $this->left = $this->sanitizeInput($categoryID, FILTER_SANITIZE_NUMBER_INT);
+        $this->mark();
+
+        return $this;
+    }
+
+    /**
+     * 
+     * @return int 
+     */
+    public function right(): int {
+        return $this->right;
+    }
+
+    /**
+     * 
+     * @param int $categoryID 
+     * @return AbstractCategory 
+     */
+    public function setRight(int $categoryID): self {
+        $this->right = $this->sanitizeInput($categoryID, FILTER_SANITIZE_NUMBER_INT);
+        $this->mark();
+
+        return $this;
+    }
+
+    /**
+     * 
+     * @return int|null
+     */
+    public function root(): ?int {
+        return $this->root;
+    }
+
+    /**
+     * 
+     * @param int|null $categoryID 
+     * @return AbstractCategory 
+     */
+    public function setRoot(?int $categoryID): self {
+        $this->root = $this->sanitizeInput($categoryID, FILTER_SANITIZE_NUMBER_INT, true);
+        $this->mark();
+
+        return $this;
+    }
+
+    /**
+     * Get the value of expanded
+     */
+    public function isExpanded() {
+        return $this->expanded;
+    }
+
+    /**
+     * Set the value of expanded
+     */
+    public function expand(bool $flag): self {
+        $this->expanded = $flag;
+        $this->mark();
+
+        return $this;
     }
 }

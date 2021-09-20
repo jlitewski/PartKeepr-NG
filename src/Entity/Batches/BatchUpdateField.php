@@ -16,7 +16,7 @@ class BatchUpdateField extends PKNGEntity implements IBatchEntity {
     /**
      * The part this batch job query field refers to.
      *
-     * @ORM\ManyToOne(targetEntity="PartKeepr\BatchJobBundle\Entity\BatchJob", inversedBy="batchJobQueryFields")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Batches\BatchJob", inversedBy="batchJobQueryFields")
      *
      * @var BatchJob
      */
@@ -67,7 +67,7 @@ class BatchUpdateField extends PKNGEntity implements IBatchEntity {
     }
 
     public function setDescription(string $description): self {
-        $this->description = $description;
+        $this->description = $this->sanitizeInput($description, FILTER_SANITIZE_STRING);
         $this->mark();
 
         return $this;
@@ -89,7 +89,7 @@ class BatchUpdateField extends PKNGEntity implements IBatchEntity {
     }
 
     public function setProperty(string $propertyName): self {
-        $this->property = $propertyName;
+        $this->property = $this->sanitizeInput($propertyName, FILTER_SANITIZE_STRING);
         $this->mark();
 
         return $this;
@@ -100,7 +100,7 @@ class BatchUpdateField extends PKNGEntity implements IBatchEntity {
     }
 
     public function setValue(string $value): self {
-        $this->value = $value;
+        $this->value = $this->sanitizeInput($value, FILTER_SANITIZE_STRING);
         $this->mark();
 
         return $this;
@@ -111,7 +111,7 @@ class BatchUpdateField extends PKNGEntity implements IBatchEntity {
     }
 
     public function setDynamic(bool $dynamic): self {
-        $this->dynamic = $dynamic;
+        $this->dynamic = $this->sanitizeInput($dynamic, FILTER_VALIDATE_BOOLEAN);
         $this->mark();
 
         return $this;

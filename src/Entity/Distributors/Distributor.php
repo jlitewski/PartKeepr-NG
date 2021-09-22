@@ -2,14 +2,17 @@
 namespace App\Entity\Distributors;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Entity\Core\PKNGEntity;
 use App\Util\Annotation\TargetService;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Represents a distributor.
  *
  * @ORM\Entity
+ * @UniqueEntity("name")
  * @TargetService(uri="/api/distributors")
  **/
 class Distributor extends PKNGEntity {
@@ -19,6 +22,7 @@ class Distributor extends PKNGEntity {
      * @ORM\Column(type="string",unique=true)
      * @Groups({"default"})
      *
+     * @Assert\NotNull
      * @var string
      */
     private $name;
@@ -29,6 +33,7 @@ class Distributor extends PKNGEntity {
      * @ORM\Column(type="text",nullable=true)
      * @Groups({"default"})
      *
+     * @Assert\NotBlank(allowNull=true)
      * @var string
      */
     private $address;
@@ -39,6 +44,7 @@ class Distributor extends PKNGEntity {
      * @ORM\Column(type="string",nullable=true)
      * @Groups({"default"})
      *
+     * @Assert\NotBlank(allowNull=true)
      * @var string
      */
     private $url;
@@ -49,6 +55,7 @@ class Distributor extends PKNGEntity {
      * @ORM\Column(type="string",nullable=true)
      * @Groups({"default"})
      *
+     * @Assert\NotBlank(allowNull=true)
      * @var string
      */
     private $phone;
@@ -59,6 +66,7 @@ class Distributor extends PKNGEntity {
      * @ORM\Column(type="string",nullable=true)
      * @Groups({"default"})
      *
+     * @Assert\NotBlank(allowNull=true)
      * @var string
      */
     private $fax;
@@ -69,6 +77,7 @@ class Distributor extends PKNGEntity {
      * @ORM\Column(type="string",nullable=true)
      * @Groups({"default"})
      *
+     * @Assert\NotBlank(allowNull=true)
      * @var string
      */
     private $email;
@@ -79,6 +88,7 @@ class Distributor extends PKNGEntity {
      * @ORM\Column(type="text",nullable=true)
      * @Groups({"default"})
      *
+     * @Assert\NotBlank(allowNull=true)
      * @var string
      */
     private $comment;
@@ -89,6 +99,7 @@ class Distributor extends PKNGEntity {
      * @ORM\Column(type="string", name="skuurl", nullable=true)
      * @Groups({"default"})
      *
+     * @Assert\NotBlank(allowNull=true)
      * @var string
      */
     private $lookupURL;
@@ -99,9 +110,10 @@ class Distributor extends PKNGEntity {
      * @ORM\Column(type="boolean",options={"default":false})
      * @Groups({"default"})
      *
+     * @Assert\NotBlank(allowNull=true)
      * @var bool
      */
-    private $enabledForReports = true;
+    private $enabledForReports = false;
 
     /**
      * Gets the name of this distributor
@@ -264,6 +276,4 @@ class Distributor extends PKNGEntity {
 
         return $this;
     }
-
-    public function Validate() { }
 }

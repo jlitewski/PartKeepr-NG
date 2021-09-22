@@ -2,6 +2,7 @@
 namespace App\Entity\Category;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -27,10 +28,10 @@ abstract class AbstractCategory extends PKNGEntity {
     /**
      * The "left" property of the nested set.
      *
-     * @ORM\Column(name="lft", type="integer")
-     *
      * @Gedmo\TreeLeft
-     *
+     * @ORM\Column(name="lft", type="integer")
+     * 
+     * @Assert\NotNull
      * @var int
      */
     private $left;
@@ -38,10 +39,10 @@ abstract class AbstractCategory extends PKNGEntity {
     /**
      * The "right" property of the nested set.
      *
+     * @Gedmo\TreeRight
      * @ORM\Column(name="rgt", type="integer")
      *
-     * @Gedmo\TreeRight
-     *
+     * @Assert\NotNull
      * @var int
      */
     private $right;
@@ -50,6 +51,7 @@ abstract class AbstractCategory extends PKNGEntity {
      * @Gedmo\TreeLevel
      * @ORM\Column(name="lvl", type="integer")
      *
+     * @Assert\NotNull
      * @var int
      */
     private $level;
@@ -57,6 +59,9 @@ abstract class AbstractCategory extends PKNGEntity {
     /**
      * @Gedmo\TreeRoot
      * @ORM\Column(name="root", type="integer", nullable=true)
+     * 
+     * @Assert\NotBlank(allowNull=true)
+     * @var int
      */
     private $root;
 
@@ -65,7 +70,9 @@ abstract class AbstractCategory extends PKNGEntity {
      *
      * @ORM\Column(length=128)
      * @Groups({"default"})
-     *
+     * 
+     * @Assert\NotNull
+     * @Assert\Length(max=128)
      * @var string
      */
     private $name;
@@ -76,6 +83,7 @@ abstract class AbstractCategory extends PKNGEntity {
      * @ORM\Column(type="text",nullable=true)
      * @Groups({"default"})
      *
+     * @Assert\NotBlank(allowNull=true)
      * @var string
      */
     private $description;
@@ -83,6 +91,7 @@ abstract class AbstractCategory extends PKNGEntity {
     /**
      * @Groups({"default"})
      *
+     * @Assert\NotNull
      * @var bool
      */
     private $expanded = true;

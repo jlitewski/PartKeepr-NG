@@ -2,6 +2,7 @@
 namespace App\Entity\Stock;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Entity\User\User;
 use App\Entity\Core\PKNGEntity;
 use App\Util\Annotation\TargetService;
@@ -18,6 +19,7 @@ class StockEntry extends PKNGEntity {
      * @ORM\Column(type="integer", name="stockLevel")
      * @Groups({"default"})
      * 
+     * @Assert\NotNull
      * @var int
      */
     private $stockChange;
@@ -44,6 +46,7 @@ class StockEntry extends PKNGEntity {
      * @ORM\Column(type="decimal",precision=13,scale=4,nullable=true)
      * @Groups({"default"})
      *
+     * @Assert\NotBlank(allowNull=true)
      * @var float
      */
     private $price;
@@ -52,6 +55,7 @@ class StockEntry extends PKNGEntity {
      * @ORM\Column(type="datetime")
      * @Groups({"default"})
      *
+     * @Assert\DateTime
      * @var \DateTime
      */
     private $dateTime;
@@ -62,6 +66,7 @@ class StockEntry extends PKNGEntity {
      * @ORM\Column(type="boolean")
      * @Groups({"default"})
      *
+     * @Assert\NotNull
      * @var bool
      */
     private $correction;
@@ -70,6 +75,7 @@ class StockEntry extends PKNGEntity {
      * @ORM\Column(type="string",nullable=true)
      * @Groups({"default"})
      *
+     * @Assert\NotBlank(allowNull=true)
      * @var string
      */
     private $comment;
@@ -281,6 +287,4 @@ class StockEntry extends PKNGEntity {
 
         return $this;
     }
-
-    public function Validate() { }
 }

@@ -2,24 +2,28 @@
 namespace App\Entity\Parts;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Entity\Core\PKNGEntity;
 use App\Entity\Units\SiPrefix;
 use App\Entity\Units\Unit;
 use App\Util\Enums\PartParameterValues;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * This object represents a parameter. Each parameter can have an unit (defined by the class "Unit") associated with
  * a numeric value.
  *
  * @ORM\Entity
+ * @UniqueEntity("name")
  * @ORM\HasLifecycleCallbacks
  */
 class PartParameter extends PKNGEntity {
      /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Parts\Part", inversedBy="parameters")
      * The part this parameter is bound to
      *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Parts\Part", inversedBy="parameters")
+     * 
      * @var Part
      */
     private $part;
@@ -27,9 +31,10 @@ class PartParameter extends PKNGEntity {
     /**
      * The name of the parameter (e.g. Resistance, Voltage).
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", unique=true)
      * @Groups({"default"})
      *
+     * @Assert\NotNull
      * @var string
      */
     private $name;
@@ -40,6 +45,7 @@ class PartParameter extends PKNGEntity {
      * @ORM\Column(type="string")
      * @Groups({"default"})
      *
+     * @Assert\NotNull
      * @var string
      */
     private $description;
@@ -50,6 +56,7 @@ class PartParameter extends PKNGEntity {
      * @ORM\ManyToOne(targetEntity="App\Entity\Units\Unit")
      * @Groups({"default"})
      *
+     * @Assert\NotBlank(allowNull=true)
      * @var Unit
      */
     private $unit;
@@ -63,6 +70,7 @@ class PartParameter extends PKNGEntity {
      * @ORM\Column(type="float",nullable=true)
      * @Groups({"default"})
      *
+     * @Assert\NotBlank(allowNull=true)
      * @var float
      */
     private $value;
@@ -72,6 +80,7 @@ class PartParameter extends PKNGEntity {
      *
      * @ORM\Column(type="float",nullable=true)
      *
+     * @Assert\NotBlank(allowNull=true)
      * @var mixed
      */
     private $normalizedValue;
@@ -82,6 +91,7 @@ class PartParameter extends PKNGEntity {
      * @ORM\Column(type="float",name="maximumValue",nullable=true)
      * @Groups({"default"})
      *
+     * @Assert\NotBlank(allowNull=true)
      * @var float
      */
     private $maxValue;
@@ -91,6 +101,7 @@ class PartParameter extends PKNGEntity {
      *
      * @ORM\Column(type="float",nullable=true)
      *
+     * @Assert\NotBlank(allowNull=true)
      * @var mixed
      */
     private $normalizedMaxValue;
@@ -101,6 +112,7 @@ class PartParameter extends PKNGEntity {
      * @ORM\Column(type="float",name="minimumValue",nullable=true)
      * @Groups({"default"})
      *
+     * @Assert\NotBlank(allowNull=true)
      * @var float
      */
     private $minValue;
@@ -110,6 +122,7 @@ class PartParameter extends PKNGEntity {
      *
      * @ORM\Column(type="float",nullable=true)
      *
+     * @Assert\NotBlank(allowNull=true)
      * @var mixed
      */
     private $normalizedMinValue;
@@ -120,6 +133,7 @@ class PartParameter extends PKNGEntity {
      * @ORM\Column(type="string")
      * @Groups({"default"})
      *
+     * @Assert\NotNull
      * @var string
      */
     private $stringValue;
@@ -130,6 +144,7 @@ class PartParameter extends PKNGEntity {
      * @ORM\Column(type="string")
      * @Groups({"default"})
      *
+     * @Assert\NotNull
      * @var string
      */
     private $valueType;
@@ -485,9 +500,5 @@ class PartParameter extends PKNGEntity {
         $this->setNormalizedMaxValue($this->renormalizeValue($this->maxSiPrefix, $this->maxValue))
         ->setNormalizedValue($this->renormalizeValue($this->siPrefix, $this->value))
         ->setNormalizedMinValue($this->renormalizeValue($this->minSiPrefix, $this->minValue));
-    }
-
-    public function Validate() {
-
     }
 }

@@ -3,15 +3,18 @@ namespace App\Entity\Manufacturers;
 
 use App\Entity\Core\PKNGEntity;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use App\Util\Annotation\TargetService;
 use App\Util\Annotation\UploadedFileCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Represents a manufacturer.
  *
  * @ORM\Entity
+ * @UniqueEntity("name")
  * @TargetService(uri="/api/manufacturers")
  **/
 class Manufacturer extends PKNGEntity {
@@ -21,6 +24,7 @@ class Manufacturer extends PKNGEntity {
      * @ORM\Column(type="string",unique=true)
      * @Groups({"default"})
      *
+     * @Assert\NotNull
      * @var string
      */
     private $name;
@@ -31,6 +35,7 @@ class Manufacturer extends PKNGEntity {
      * @ORM\Column(type="text",nullable=true)
      * @Groups({"default"})
      *
+     * @Assert\NotBlank(allowBlank=true)
      * @var string
      */
     private $address;
@@ -41,6 +46,7 @@ class Manufacturer extends PKNGEntity {
      * @ORM\Column(type="string",nullable=true)
      * @Groups({"default"})
      *
+     * @Assert\NotBlank(allowBlank=true)
      * @var string
      */
     private $url;
@@ -51,6 +57,7 @@ class Manufacturer extends PKNGEntity {
      * @ORM\Column(type="string",nullable=true)
      * @Groups({"default"})
      *
+     * @Assert\NotBlank(allowBlank=true)
      * @var string
      */
     private $email;
@@ -61,6 +68,7 @@ class Manufacturer extends PKNGEntity {
      * @ORM\Column(type="text",nullable=true)
      * @Groups({"default"})
      *
+     * @Assert\NotBlank(allowBlank=true)
      * @var string
      */
     private $comment;
@@ -71,6 +79,7 @@ class Manufacturer extends PKNGEntity {
      * @ORM\Column(type="string",nullable=true)
      * @Groups({"default"})
      *
+     * @Assert\NotBlank(allowBlank=true)
      * @var string
      */
     private $phone;
@@ -81,6 +90,7 @@ class Manufacturer extends PKNGEntity {
      * @ORM\Column(type="string",nullable=true)
      * @Groups({"default"})
      *
+     * @Assert\NotBlank(allowBlank=true)
      * @var string
      */
     private $fax;
@@ -263,6 +273,4 @@ class Manufacturer extends PKNGEntity {
          * $this->icLogos->add($logo);
          */
     }
-
-    public function Validate() { }
 }

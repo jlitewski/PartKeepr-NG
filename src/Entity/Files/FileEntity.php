@@ -2,6 +2,7 @@
 namespace App\Entity\Files;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Entity\Core\PKNGEntity;
 use DateTime;
 use Ramsey\Uuid\Uuid;
@@ -20,6 +21,7 @@ abstract class FileEntity extends PKNGEntity {
      * @ORM\Column(type="string")
      * @Groups({"default"})
      *
+     * @Assert\NotNull
      * @var string
      **/
     private $type;
@@ -30,6 +32,7 @@ abstract class FileEntity extends PKNGEntity {
      * @ORM\Column(type="string")
      * @Groups({"default"})
      *
+     * @Assert\NotNull
      * @var string
      */
     private $filename;
@@ -40,6 +43,7 @@ abstract class FileEntity extends PKNGEntity {
      * @ORM\Column(type="string",nullable=true,name="originalname")
      * @Groups({"default"})
      *
+     * @Assert\NotBlank(allowNull=true)
      * @var string
      */
     private $originalFilename;
@@ -50,6 +54,7 @@ abstract class FileEntity extends PKNGEntity {
      * @ORM\Column(type="string")
      * @Groups({"default"})
      *
+     * @Assert\NotNull
      * @var string
      */
     private $mimetype;
@@ -60,6 +65,7 @@ abstract class FileEntity extends PKNGEntity {
      * @ORM\Column(type="integer")
      * @Groups({"default"})
      *
+     * @Assert\NotNull
      * @var int
      */
     private $size;
@@ -70,6 +76,7 @@ abstract class FileEntity extends PKNGEntity {
      * @ORM\Column(type="string",nullable=true)
      * @Groups({"default"})
      *
+     * @Assert\NotBlank(allowNull=true)
      * @var string
      */
     private $extension;
@@ -80,6 +87,7 @@ abstract class FileEntity extends PKNGEntity {
      * @ORM\Column(type="text",nullable=true)
      * @Groups({"default"})
      *
+     * @Assert\NotBlank(allowNull=true)
      * @var string
      */
     private $description;
@@ -92,8 +100,9 @@ abstract class FileEntity extends PKNGEntity {
     private $replacement = null;
 
     /**
-     * @ORM\Column(type="datetime",nullable=false)
+     * @ORM\Column(type="datetime")
      *
+     * @Assert\DateTime
      * @var \DateTime
      */
     private $created;

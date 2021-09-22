@@ -122,8 +122,4 @@ class Unit extends PKNGEntity {
         return $this;
     }
 
-    public function Validate() {
-        //TODO: Write out this logic, I just can't be asked to do it tonight because I'm tired
-    }
-
 }

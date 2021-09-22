@@ -2,8 +2,9 @@
 namespace App\Entity\Units;
 
 use App\Entity\Core\PKNGEntity;
-use App\Util\Annotation\TargetService;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use App\Util\Annotation\TargetService;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
@@ -152,9 +153,5 @@ class SiPrefix extends PKNGEntity {
      */
     public function calculateProduct(float $value): float {
         return $value * pow($this->base, $this->exponent);
-    }
-
-    public function Validate() {
-        //TODO: Write out this logic, I just can't be asked to do it tonight because I'm tired
     }
 }

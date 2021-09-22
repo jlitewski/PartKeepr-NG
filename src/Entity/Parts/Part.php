@@ -14,8 +14,4 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Part extends PKNGEntity {
 
-
-    public function Validate() {
-
-    }
 }

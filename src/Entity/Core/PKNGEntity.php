@@ -2,6 +2,7 @@
 namespace App\Entity\Core;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Abstract class used as the basis of all PKNG Entities
@@ -121,10 +122,8 @@ abstract class PKNGEntity {
 
     /**
      * Clears the dirty flag after running through a Validate() check
-     * 
-     * @internal THIS SHOULD ONLY BE USED INTERNALLY BY THE ENTITIES
      */
-    protected final function clearMark(): void {
+    private final function clearMark(): void {
         if(!$this->isDirty()){
             $this->dirty = false;
         }
@@ -145,9 +144,18 @@ abstract class PKNGEntity {
      * This is to prevent the state of the Entity from going invalid and causing
      * headaches down the line
      * 
-     * @throws InvalidEntityStateException
-     * @return void
-     * @todo Maybe use this as a wrapper for the Symfony validation tools? Is that possible?
+     * @return string|true Returns a string of errors, or true for a validated entity
      */
-    public abstract function Validate();
+    public final function Validate(ValidatorInterface $validator): ?bool {
+        if($this->isDirty()) { //We really shouldn't check validation if the entity isn't dirty
+            $errors = $validator->validate($this);
+
+            if(count($errors) > 0) { //There were errors with validation
+                return (string)$errors;
+            } else {
+                $this->clearMark(); //Unmark the Entity as Dirty
+                return true;
+            }
+        } else return true;
+    }
 }

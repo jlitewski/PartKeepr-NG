@@ -2,6 +2,7 @@
 namespace App\Entity\Auth;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Entity\Core\PKNGEntity;
 use App\Util\Annotation\TargetService;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -17,7 +18,9 @@ class UserProvider extends PKNGEntity {
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"default"})
-     *
+     * 
+     * @Assert\NotNull
+     * @Assert\Length(max=255)
      * @var string
      */
     private $type;
@@ -25,7 +28,8 @@ class UserProvider extends PKNGEntity {
     /**
      * @ORM\Column(type="boolean")
      * @Groups({"default"})
-     *
+     * 
+     * @Assert\NotNull
      * @var bool
      */
     private $editable;
@@ -46,6 +50,7 @@ class UserProvider extends PKNGEntity {
      */
     public function setEditable(bool $editable): self {
         $this->editable = $editable;
+        $this->mark();
 
         return $this;
     }
@@ -62,12 +67,9 @@ class UserProvider extends PKNGEntity {
      */
     public function setType(string $type): self {
         $this->type = $type;
+        $this->mark();
 
         return $this;
-    }
-
-    public function Validate() {
-        
     }
 
 }

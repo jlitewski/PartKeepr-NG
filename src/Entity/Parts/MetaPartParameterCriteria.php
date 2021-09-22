@@ -2,6 +2,7 @@
 namespace App\Entity\Parts;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Entity\Core\PKNGEntity;
 use App\Entity\Units\Unit;
 use App\Entity\Units\SiPrefix;
@@ -86,9 +87,6 @@ class MetaPartParameterCriteria extends PKNGEntity {
      * @var App\Entity\Units\Unit
      */
     private $unit;
-
-    public function Validate() { }
-
 
     /**
      * Get the value of part

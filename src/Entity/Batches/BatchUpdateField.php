@@ -116,32 +116,4 @@ class BatchUpdateField extends PKNGEntity implements IBatchEntity {
 
         return $this;
     }
-
-    public function Validate() {
-        if($this->isDirty()) {
-            if(!is_string($this->property)) {
-                throw new InvalidEntityStateException("Property has to be a string! Entity '".$this->__toString()."'");
-            }
-    
-            if(!is_string($this->value)) {
-                throw new InvalidEntityStateException("Value has to be a string! Entity '".$this->__toString()."'");
-            }
-    
-            if(!is_string($this->description)) {
-                throw new InvalidEntityStateException("Description has to be a string! Entity '".$this->__toString()."'");
-            }
-
-            if(!is_bool($this->dynamic)) {
-                throw new InvalidEntityStateException("Dynamic has to be a boolean! Entity '".$this->__toString()."'");
-            }
-
-            if($this->batchJob != null) {
-                if(!($this->batchJob instanceof BatchJob)) {
-                    throw new InvalidEntityStateException("The value of \$batchjob isn't an instance of BatchJob! Entity '".$this->__toString()."'");
-                }
-            }
-
-            $this->clearMark();
-        }
-    }
 }

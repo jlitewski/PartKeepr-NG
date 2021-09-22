@@ -5,13 +5,14 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Core\PKNGEntity;
 use App\Util\Annotation\TargetService;
 use Symfony\Component\Serializer\Annotation\Groups;
-use App\Exception\Core\InvalidEntityStateException;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 //TODO: Flesh out the PHPDocs for the methods
 
 /**
  * @ORM\Entity
+ * @UniqueEntity("name")
  * @TargetService(uri="/api/batch_jobs")
  */
 class BatchJob extends PKNGEntity {
@@ -21,7 +22,9 @@ class BatchJob extends PKNGEntity {
      * 
      * @ORM\Column(length=64,unique=true)
      * @Groups({"default"})
-     *
+     * 
+     * @Assert\NotNull
+     * @Assert\Length(max=64)
      * @var string
      */
     private $name;
@@ -80,11 +83,7 @@ class BatchJob extends PKNGEntity {
     }
 
     /**
-     * Sets the name of the PKNGEntity this BatchJob is associated with, and marks
-     * the Entity as dirty.
-     * 
-     * Please run Validate() before trying to do any database commands to prevent
-     * any weirdness or invalid states from happening
+     * Sets the name of the PKNGEntity this BatchJob is associated with.
      * 
      * @param string $entityName
      * @return self
@@ -176,27 +175,5 @@ class BatchJob extends PKNGEntity {
         $this->mark();
 
         return $this;
-    }
-
-    public function Validate() {
-        if($this->isDirty()) {
-            if(!is_string($this->name)) {
-                throw new InvalidEntityStateException("Name has to be a string! Entity '".$this->__toString()."'");
-            }
-
-            if(!is_string($this->baseEntity)) {
-                throw new InvalidEntityStateException("BaseEntity has to be a string! Entity '".$this->__toString()."'");
-            }
-
-            if(!($this->batchJobQueryFields instanceof ArrayCollection)) {
-                throw new InvalidEntityStateException("\$batchJobQueryFields not instance of ArrayCollection! Entity '".$this->__toString()."'");
-            }
-
-            if(!($this->batchJobUpdateFields instanceof ArrayCollection)) {
-                throw new InvalidEntityStateException("\$batchJobUpdateFields not instance of ArrayCollection! Entity '".$this->__toString()."'");
-            }
-
-            $this->clearMark();
-        }
     }
 }

@@ -2,25 +2,29 @@
 namespace App\Entity\Parts;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use App\Entity\Core\PKNGEntity;
 use App\Util\Annotation\TargetService;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * This entity represents a part measurement unit. Typical measurement units are pieces, centimeters etc.
  *
  * @ORM\Entity
  * @ORM\Table(name="PartUnit")
+ * @UniqueEntity("name")
  * @TargetService(uri="/api/part_measurement_units")
  **/
 class PartMeasurementUnit extends PKNGEntity {
     /**
      * Defines the name of the unit.
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", unique=true)
      * @Groups({"default"})
      *
+     * @Assert\NotNull
      * @var string
      */
     private $name;
@@ -31,6 +35,7 @@ class PartMeasurementUnit extends PKNGEntity {
      * @ORM\Column(type="string")
      * @Groups({"default"})
      *
+     * @Assert\NotNull
      * @var string
      */
     private $shortName;
@@ -41,6 +46,7 @@ class PartMeasurementUnit extends PKNGEntity {
      * @ORM\Column(type="boolean", name="is_default")
      * @Groups({"default"})
      *
+     * @Assert\NotNull
      * @var bool
      */
     private $default;
@@ -141,6 +147,4 @@ class PartMeasurementUnit extends PKNGEntity {
     public function getParts() {
         return $this->parts->getValues();
     }
-
-    public function Validate() { }
 }

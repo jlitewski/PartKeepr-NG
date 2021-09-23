@@ -2,6 +2,7 @@
 namespace App\Entity\User;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Nucleos\UserBundle\Model\User as BaseUser;
 use App\Util\Annotation\TargetService;
 use Symfony\Component\Serializer\Annotation\Groups;

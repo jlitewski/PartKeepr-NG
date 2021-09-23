@@ -71,8 +71,6 @@ class User extends PKNGEntity implements UserInterface, EquatableInterface {
      */
     private $provider;
 
-    public function Validate() { }
-
     public function getRoles() { }
 
     public function getPassword() { }

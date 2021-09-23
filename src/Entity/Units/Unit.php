@@ -3,6 +3,7 @@ namespace App\Entity\Units;
 
 use App\Entity\Core\PKNGEntity;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use App\Util\Annotation\TargetService;
 use App\Entity\Units\SiPrefix;
@@ -38,13 +39,23 @@ class Unit extends PKNGEntity {
     /**
      * Defines the allowed SiPrefixes for this parameter unit.
      *
-     * @ORM\ManyToMany(targetEntity="PartKeepr\SiPrefixBundle\Entity\SiPrefix")
-     * @ORM\JoinTable(name="UnitSiPrefixes",
-     *            joinColumns={@ORM\JoinColumn(name="unit_id", referencedColumnName="id")},
-     *            inverseJoinColumns={@ORM\JoinColumn(name="siprefix_id", referencedColumnName="id")}
-     *            )
+     * @ORM\ManyToMany(targetEntity="App\Entity\Units\SiPrefix")
+     * @ORM\JoinTable(
+     *      name="UnitSiPrefixes",
+     *      joinColumns={
+     *          @ORM\JoinColumn(
+     *              name="unit_id",
+     *              referencedColumnName="id"
+     *          )
+     *      },
+     *      inverseJoinColumns={
+     *          @ORM\JoinColumn(
+     *              name="siprefix_id",
+     *              referencedColumnName="id"
+     *          )
+     *      }
+     * )
      * @Groups({"default"})
-     * })
      *
      * @var ArrayCollection
      */

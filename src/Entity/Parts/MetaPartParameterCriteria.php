@@ -13,7 +13,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
  */
 class MetaPartParameterCriteria extends PKNGEntity {
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Parts\Part", inversedBy="metaPartParameterCriterias")
+     * @ORM\ManyToOne(
+     *      targetEntity="App\Entity\Parts\Part",
+     *      inversedBy="metaPartParameterCriterias"
+     * )
      *
      * @var App\Entity\Parts\Part
      */

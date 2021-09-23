@@ -101,7 +101,12 @@ class Manufacturer extends PKNGEntity {
      * ### Note:
      * PartKeepr uses this as IC Logos, we are using this as Manufacturer Logos
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Manufacturers\ManufacturerLogo",mappedBy="manufacturer",cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(
+     *      targetEntity="App\Entity\Manufacturers\ManufacturerLogo",
+     *      mappedBy="manufacturer",
+     *      cascade={"persist", "remove"},
+     *      orphanRemoval=true
+     * )
      *
      * @UploadedFileCollection()
      * @Groups({"default"})

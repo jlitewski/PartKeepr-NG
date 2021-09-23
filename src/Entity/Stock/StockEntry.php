@@ -25,7 +25,10 @@ class StockEntry extends PKNGEntity {
     private $stockChange;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Parts\Part", inversedBy="stockLevels")
+     * @ORM\ManyToOne(
+     *      targetEntity="App\Entity\Parts\Part",
+     *      inversedBy="stockLevels"
+     * )
      * @Groups({"default"})
      * 
      * @var Part

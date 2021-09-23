@@ -22,7 +22,10 @@ class PartParameter extends PKNGEntity {
      /**
      * The part this parameter is bound to
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Parts\Part", inversedBy="parameters")
+     * @ORM\ManyToOne(
+     *      targetEntity="App\Entity\Parts\Part",
+     *      inversedBy="parameters"
+     * )
      * 
      * @var Part
      */

@@ -2,7 +2,7 @@
 namespace App\Entity\Batches;
 
 use App\Entity\Core\PKNGEntity;
-use App\Exception\Core\InvalidEntityStateException;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -18,7 +18,10 @@ class BatchQueryField extends PKNGEntity implements IBatchEntity {
     /**
      * The part this batch job query field refers to.
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Batches\BatchJob", inversedBy="batchJobQueryFields")
+     * @ORM\ManyToOne(
+     *      targetEntity="App\Entity\Batches\BatchJob",
+     *      inversedBy="batchJobQueryFields"
+     * )
      *
      * @var BatchJob
      */

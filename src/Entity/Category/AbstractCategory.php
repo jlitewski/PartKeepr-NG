@@ -15,7 +15,12 @@ use App\Entity\Core\PKNGEntity;
  * If you are interested on how NestedSets work, please read http://en.wikipedia.org/wiki/Nested_set_model
  * 
  * @ORM\MappedSuperclass()
- * @ORM\Table(indexes={@ORM\Index(columns={"lft"}),@ORM\Index(columns={"rgt"})})
+ * @ORM\Table(
+ *      indexes={
+ *          @ORM\Index(columns={"lft"}),
+ *          @ORM\Index(columns={"rgt"})
+ *      }
+ * )
  */
 abstract class AbstractCategory extends PKNGEntity {
     /**

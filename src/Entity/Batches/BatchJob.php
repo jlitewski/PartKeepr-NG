@@ -2,6 +2,7 @@
 namespace App\Entity\Batches;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Entity\Core\PKNGEntity;
 use App\Util\Annotation\TargetService;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -32,7 +33,11 @@ class BatchJob extends PKNGEntity {
     /**
      * The fields to query, in an array
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Batches\BatchQueryField",mappedBy="batchJob",cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(
+     *      targetEntity="App\Entity\Batches\BatchQueryField",
+     *      mappedBy="batchJob",cascade={"persist", "remove"},
+     *      orphanRemoval=true
+     * )
      * @Groups({"default"})
      *
      * @var ArrayCollection
@@ -42,7 +47,11 @@ class BatchJob extends PKNGEntity {
     /**
      * The fields to update, in an array
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Batches\BatchUpdateField",mappedBy="batchJob",cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(
+     *      targetEntity="App\Entity\Batches\BatchUpdateField",
+     *      mappedBy="batchJob",cascade={"persist", "remove"}, 
+     *      orphanRemoval=true
+     * )
      * @Groups({"default"})
      *
      * @var ArrayCollection
